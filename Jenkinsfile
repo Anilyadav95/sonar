@@ -14,24 +14,10 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sq1') {
-                    bat '''mvn clean verify sonar:sonar -Dsonar.projectKey=sonar-analysis -Dsonar.projectName='sonar-analysis' -Dsonar.host.url=http://localhost:9000''' //port 9000 is default for sonar
+                withSonarQubeEnv('ServerNameSonar') {
+                    bat '''mvn clean verify sonar:sonar -Dsonar.projectKey=ProjectNameSonar -Dsonar.projectName='ProjectNameSonar' -Dsonar.host.url=http://localhost:9000''' //port 9000 is default for sonar
                     echo 'SonarQube Analysis Completed'
                 }
-            }
-        }
-    }
-    post {
-        success {
-            script {
-                // Trigger another pipeline upon success
-                build job: 'telegram-notification'
-            }
-        }
-        failure {
-            script {
-                // Trigger another pipeline upon failure
-                build job: 'telegram-notification'
             }
         }
     }
