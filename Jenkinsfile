@@ -21,7 +21,7 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
                         mvn clean verify 
-                        sonar:sonar sonar-scanner -Dsonar.projectKey=latest -Dsonar.sources=. -Dsonar.host.url=http://43.204.215.226:9000 -Dsonar.token=sqp_a449b09198718e425e90406de284df93a7fa79a9
+                        sonar-scanner -Dsonar.projectKey=testing19 -Dsonar.sources=. -Dsonar.host.url=http://52.66.84.14:9000 -Dsonar.token=sqp_9bafdc7b502a03bdab7db3f78d8964784ab95851406de284df93a7fa79a9
            
                     '''
                     echo 'SonarQube Analysis Completed'
